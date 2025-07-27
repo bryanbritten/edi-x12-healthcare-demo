@@ -1,5 +1,2 @@
-FROM atmoz/sftp:debian
-WORKDIR /sftp
-
-# creates a user called admin with a password of "password" and UID of 1001
-CMD ["admin:password:10001"]
+FROM atmoz/sftp:alpine
+CMD [ "hospital:hospital:1001::inbound/999,inbound/277,outbound/837", "payer:payer:1002::inbound/837,outbound/999,outbound/277" ]

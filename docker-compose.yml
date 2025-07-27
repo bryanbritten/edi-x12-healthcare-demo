@@ -1,9 +1,25 @@
 services:
+  sftp:
+    build:
+      context: ./docker/sftp
+    container_name: sftp
+    ports:
+      - "2222:22"
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD", "sh", "-c", "sftp -oBatchMode=yes -oStrictHostKeyChecking=no -P 22 foo@localhost <<< 'exit'" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
   producer:
     build:
-      context: ./docker/producer
+      context: .
+      dockerfile: ./docker/producer/Dockerfile
     container_name: producer
     restart: on-failure
+    depends_on:
+      - sftp
     healthcheck:
       test: [ "CMD", "pgrap", "-f", "producer.py" ]
       interval: 5m
@@ -15,6 +31,8 @@ services:
       context: ./docker/consumer
     container_name: consumer
     restart: on-failure
+    depends_on:
+      - sftp
     healthcheck:
       test: [ "CMD", "pgrep", "-f", "consumer.py" ]
       interval: 10s
@@ -50,19 +68,6 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
-  sftp:
-    build:
-      context: ./docker/sftp
-    container_name: sftp
-    ports:
-      - "2222:22"
-    restart: on-failure
-    healthcheck:
-      test: [ "CMD", "sh", "-c", "sftp -oBatchMode=yes -oStrictHostKeyChecking=no -P 22 foo@localhost <<< 'exit'" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
   prometheus:
     build:
       context: ./docker/monitor/prometheus
