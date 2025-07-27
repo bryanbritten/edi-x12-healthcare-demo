@@ -54,6 +54,8 @@ services:
     build:
       context: ./docker/sftp
     container_name: sftp
+    ports:
+      - "2222:22"
     restart: on-failure
     healthcheck:
       test: [ "CMD", "sh", "-c", "sftp -oBatchMode=yes -oStrictHostKeyChecking=no -P 22 foo@localhost <<< 'exit'" ]
