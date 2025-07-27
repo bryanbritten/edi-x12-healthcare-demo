@@ -70,7 +70,7 @@ The pipeline ingests EDI files from a mock SFTP server, validates and parses the
 - Libraries:
   - `pysftp` or `paramiko` (TBD) for SFTP simulation
   - `boto3` or file mocks for S3 simulation
-  - `x12` or equivalent parsing library (if using a prebuilt one)
+  - `x12` or `bots` (TBD)
   - `prometheus_client` for metrics exposure
   - `logging` for logs
 
