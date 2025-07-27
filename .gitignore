@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+.env
+.venv/
+venv/
+
+# Byte-compiled / optimized / DLL files
+*.pyd
+*.so
+*.dll
+
+# Logs
+*.log
+
+# Docker
+*.pid
+*.tar
+docker-compose.override.yml
+
+# VSCode
+.vscode/
+
+# System
+.DS_Store
+Thumbs.db

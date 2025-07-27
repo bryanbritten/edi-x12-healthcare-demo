@@ -1,0 +1,1 @@
+The data in this directory was provided by [x12.org](https://x12.org/examples). The examples were pulled on July 27th, 2025.

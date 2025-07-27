@@ -1,0 +1,9 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'x12_services'
+    static_configs:
+      - targets:
+          - 'producer:8000'
+          - 'consumer:8000'
